@@ -14,4 +14,5 @@ python train.py
 
 To predict new heating and cooling : 
 put the new values to predict in test.csv
+
 python predict.py
