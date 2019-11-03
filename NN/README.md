@@ -12,5 +12,6 @@ of buildings (that is, energy efficiency) as a function of building parameters.
 To train :
 python train.py
 
-To predict new heating and cooling :
-python test.py
+To predict new heating and cooling : 
+put the new values to predict in test.csv
+python predict.py
