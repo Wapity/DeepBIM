@@ -1,0 +1,306 @@
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\obj\Debug\xBIMTest.csprojAssemblyReference.cache
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\obj\Debug\xBIMTest.exe.config
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\obj\Debug\xBIMTest.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\xBIMTest.exe.config
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\xBIMTest.exe
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\xBIMTest.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.ValueTuple.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Win32.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\netstandard.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.AppContext.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Collections.Concurrent.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Collections.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Collections.NonGeneric.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Collections.Specialized.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.ComponentModel.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.ComponentModel.TypeConverter.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Console.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Data.Common.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.Contracts.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.Debug.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.Process.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.StackTrace.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.Tools.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.TraceSource.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Diagnostics.Tracing.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Drawing.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Dynamic.Runtime.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Globalization.Calendars.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Globalization.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Globalization.Extensions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.Compression.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.Compression.ZipFile.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.FileSystem.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.FileSystem.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.FileSystem.Watcher.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.IsolatedStorage.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.MemoryMappedFiles.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.Pipes.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Linq.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Linq.Expressions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Linq.Parallel.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Linq.Queryable.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.Http.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.NameResolution.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.NetworkInformation.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.Ping.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.Requests.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.Security.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.Sockets.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.WebHeaderCollection.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.WebSockets.Client.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Net.WebSockets.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.ObjectModel.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Reflection.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Reflection.Extensions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Reflection.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Resources.Reader.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Resources.ResourceManager.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Resources.Writer.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Extensions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Handles.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.InteropServices.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Numerics.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Serialization.Formatters.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Serialization.Json.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Serialization.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.Serialization.Xml.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Claims.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Cryptography.Csp.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.Principal.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Security.SecureString.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Text.Encoding.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Text.Encoding.Extensions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Text.RegularExpressions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.Overlapped.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.Tasks.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.Tasks.Parallel.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.Thread.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.ThreadPool.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Threading.Timer.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Xml.XDocument.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Xml.XmlDocument.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Xml.XmlSerializer.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Xml.XPath.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Xml.XPath.XDocument.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Configuration.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Logging.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Options.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Buffers.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Memory.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Common.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Geometry.Engine.Interop.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc2x3.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc4.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.IO.MemoryModel.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.ModelGeometry.Scene.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Tessellator.dll
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Configuration.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Configuration.Binder.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Logging.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Options.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Buffers.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Memory.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Common.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Common.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Geometry.Engine.Interop.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Geometry.Engine.Interop.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc2x3.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc2x3.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc4.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Ifc4.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.IO.MemoryModel.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.IO.MemoryModel.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.ModelGeometry.Scene.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.ModelGeometry.Scene.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Tessellator.pdb
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\bin\Debug\Xbim.Tessellator.xml
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\obj\Debug\xBIMTest.csproj.CopyComplete
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\obj\Debug\xBIMTest.exe
+C:\Users\Dell\Desktop\ABIM\Repositories\02xBIM\xBIMTest\obj\Debug\xBIMTest.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\xBIMTest.exe.config
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\xBIMTest.exe
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\xBIMTest.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Cryptography.Algorithms.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.ValueTuple.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Win32.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\netstandard.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.AppContext.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Collections.Concurrent.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Collections.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Collections.NonGeneric.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Collections.Specialized.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.ComponentModel.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.ComponentModel.EventBasedAsync.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.ComponentModel.TypeConverter.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Console.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Data.Common.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.Contracts.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.Debug.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.Process.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.StackTrace.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.Tools.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.TraceSource.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Diagnostics.Tracing.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Drawing.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Dynamic.Runtime.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Globalization.Calendars.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Globalization.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Globalization.Extensions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.Compression.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.Compression.ZipFile.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.FileSystem.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.FileSystem.DriveInfo.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.FileSystem.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.FileSystem.Watcher.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.IsolatedStorage.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.MemoryMappedFiles.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.Pipes.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.IO.UnmanagedMemoryStream.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Linq.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Linq.Expressions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Linq.Parallel.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Linq.Queryable.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.Http.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.NameResolution.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.NetworkInformation.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.Ping.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.Requests.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.Security.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.Sockets.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.WebHeaderCollection.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.WebSockets.Client.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Net.WebSockets.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.ObjectModel.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Reflection.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Reflection.Extensions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Reflection.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Resources.Reader.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Resources.ResourceManager.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Resources.Writer.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Extensions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Handles.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.InteropServices.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Numerics.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Serialization.Formatters.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Serialization.Json.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Serialization.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.Serialization.Xml.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Claims.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Cryptography.Csp.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Cryptography.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.Principal.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Security.SecureString.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Text.Encoding.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Text.Encoding.Extensions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Text.RegularExpressions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.Overlapped.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.Tasks.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.Tasks.Parallel.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.Thread.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.ThreadPool.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Threading.Timer.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Xml.ReaderWriter.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Xml.XDocument.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Xml.XmlDocument.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Xml.XmlSerializer.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Xml.XPath.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Xml.XPath.XDocument.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Configuration.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Logging.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Options.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Primitives.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Buffers.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Memory.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Common.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Geometry.Engine.Interop.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc2x3.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc4.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.IO.MemoryModel.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.ModelGeometry.Scene.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Tessellator.dll
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Configuration.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Configuration.Binder.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Logging.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Options.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Microsoft.Extensions.Primitives.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Buffers.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Memory.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Common.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Common.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Geometry.Engine.Interop.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Geometry.Engine.Interop.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc2x3.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc2x3.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc4.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Ifc4.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.IO.MemoryModel.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.IO.MemoryModel.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.ModelGeometry.Scene.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.ModelGeometry.Scene.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Tessellator.pdb
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\bin\Debug\Xbim.Tessellator.xml
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\obj\Debug\xBIMTest.csprojAssemblyReference.cache
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\obj\Debug\xBIMTest.exe.config
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\obj\Debug\xBIMTest.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\obj\Debug\xBIMTest.csproj.CopyComplete
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\obj\Debug\xBIMTest.exe
+C:\Users\Dell\Desktop\HIWI with Jimmy\02.xBIM Code\V1\obj\Debug\xBIMTest.pdb
