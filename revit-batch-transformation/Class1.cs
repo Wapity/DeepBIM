@@ -15,16 +15,18 @@ namespace RevitBatch
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
             string homeDirectory = Environment.GetEnvironmentVariable("HOMEPATH");
-            Console.WriteLine(projectDirectory);
+            // CHANGE PATH
+            string repoDirectory = @"C:\Users\gunther\dev\DeepBim";
 
             UIApplication uiapp = commandData.Application;
             Application app = uiapp.Application;
             try
             {
-                for(int i = 0; i < 10; i++)
+                string dataDirectory = repoDirectory + @"\Data";
+                string[] dataFiles =
+                    Directory.GetFiles(dataDirectory, "*.txt", SearchOption.AllDirectories);
+                foreach (string dataFile in dataFiles)
                 {
                     //Document doc = app.NewProjectDocument(UnitSystem.Metric);
                     // This template is needed to have the families for windows, doors available
@@ -39,8 +41,7 @@ namespace RevitBatch
                     List<List<double>> walls;
                     List<List<double>> doors;
                     List<List<double>> windows;
-                    // CHANGE PATH
-                    string dataFile = homeDirectory + @"\dev\DeepBim\textmodels-master\00.SampleData\0003_sample_floor_with_Windows.txt";
+
                     readTxtFile(dataFile, out walls, out doors, out windows);
 
 
@@ -91,8 +92,9 @@ namespace RevitBatch
                                           windowData[0], windowData[1], windowData[2], windowData[3]);
                     }
                     // This creates the files in the Windows Document Folder ( C:\Users\<username>\Documents )
-                    doc.SaveAs(homeDirectory + $"\\Documents\\revit_project_{i}.rvt");
-                    doc.Close();
+                    //doc.SaveAs(homeDirectory + $"\\Documents\\revit_project_{i}.rvt");
+                    doc.SaveAs(dataFile + ".rvt");
+                    doc.Close(false);
                 }
                 TaskDialog.Show("Revit", "Success!");;
                 return Result.Succeeded;
