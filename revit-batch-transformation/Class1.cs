@@ -11,7 +11,7 @@ namespace RevitBatch
 {
     [Transaction(TransactionMode.Manual)]
     [Regeneration(RegenerationOption.Manual)]
-    public class Class1:IExternalCommand
+    public class Class1 : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -54,28 +54,28 @@ namespace RevitBatch
                                    where (lvl.Name == levelName)
                                    select lvl).First();
                     //Wall Creation
-                    
+
                     foreach (List<double> wallData in walls)
                     {
                         // WallCreation.CreateWall(x1, y1, x2, y2);
                         this.WallCreation(doc, level,
                                           wallData[0], wallData[1], wallData[2], wallData[3]);
                     }
-            
+
 
                     //Get all the walls from the model in the specified level
                     List<Wall> WallList = GetAllWallsInLevel(doc, level);
-                    
-                    
+
+
                     //Specify the family of the doors
                     string fsFamilyNameDoor = "M_Single-Flush";
-                    string fsNameDoor  = "0915 x 2134mm";
-                    
+                    string fsNameDoor = "0915 x 2134mm";
+
                     //Specify the family of the Windos
                     string fsFamilyNameWindow = "M_Fixed";
-                    string fsNameWindow  = "0915 x 0610mm";
-                    
-                    
+                    string fsNameWindow = "0915 x 0610mm";
+
+
                     //Create the doors
                     foreach (List<double> doorData in doors)
                     {
@@ -91,132 +91,151 @@ namespace RevitBatch
                                           WallList, level,
                                           windowData[0], windowData[1], windowData[2], windowData[3]);
                     }
-                    // This creates the files in the Windows Document Folder ( C:\Users\<username>\Documents )
-                    //doc.SaveAs(homeDirectory + $"\\Documents\\revit_project_{i}.rvt");
                     doc.SaveAs(dataFile + ".rvt");
                     doc.Close(false);
                 }
-                TaskDialog.Show("Revit", "Success!");;
+                TaskDialog.Show("Revit", "Success!"); ;
                 return Result.Succeeded;
-            }   
-			
-			catch (Exception e)
-			{
+            }
+
+            catch (Exception e)
+            {
                 // this shows the whole error message in Revit
-                throw(e);
+                throw (e);
                 /*
                 string prompt = e.Message + "\n" + e.StackTrace;
 				TaskDialog.Show("Revit", prompt);;
                 return Result.Failed;	
                 */
-			}
-		}
-			
-		public void WallCreation(Document doc, Level level,
-		                         double x1,double y1,double x2,double y2)
-		{
-			
-			using ( Transaction trans = new Transaction( doc ) )
-			{
-				trans.Start( "WallDataParser" );
+            }
+        }
 
-				XYZ start = new XYZ( x1, y1, 0.0 );
-				XYZ end = new XYZ( x2, y2, 0.0 );
-				Line wallLine = Line.CreateBound( start, end );
-				Wall wall = Wall.Create( doc, wallLine as Line, level.Id, true );
-				
-				trans.Commit();
-			}
-		}
+        public void WallCreation(Document doc, Level level,
+                                 double x1, double y1, double x2, double y2)
+        {
 
-		public void CreateElement(Document doc, string fsFamilyName, string fsName,
-		                          List<Wall> WallList, Level level,
-		                          double x1,double y1,double x2,double y2)
-		{
-			
-			XYZ  elementPoint = new XYZ((x2 + x1)/2 , (y2 + y1)/2, level.Elevation);
+            using (Transaction trans = new Transaction(doc))
+            {
+                FailureHandlingOptions failureHandlingOptions
+                  = trans.GetFailureHandlingOptions();
+
+                FailureHandler failureHandler
+                  = new FailureHandler();
+
+                failureHandlingOptions.SetFailuresPreprocessor(failureHandler);
+                failureHandlingOptions.SetClearAfterRollback(true);
+
+                trans.SetFailureHandlingOptions(failureHandlingOptions);
+                trans.Start("WallDataParser");
+
+                XYZ start = new XYZ(x1, y1, 0.0);
+                XYZ end = new XYZ(x2, y2, 0.0);
+                Line wallLine = Line.CreateBound(start, end);
+                Wall wall = Wall.Create(doc, wallLine as Line, level.Id, true);
+
+                trans.Commit();
+            }
+        }
+
+        public void CreateElement(Document doc, string fsFamilyName, string fsName,
+                                  List<Wall> WallList, Level level,
+                                  double x1, double y1, double x2, double y2)
+        {
+
+            XYZ elementPoint = new XYZ((x2 + x1) / 2, (y2 + y1) / 2, level.Elevation);
 
 
-			// LINQ to find the window's FamilySymbol by its type name.
-			FamilySymbol familySymbol = (from fs in new FilteredElementCollector(doc).
-			                             OfClass(typeof(FamilySymbol)).
-			                             Cast<FamilySymbol>()
-			                             where (fs.Family.Name == fsFamilyName && fs.Name == fsName)
-			                             select fs).First();
-			
+            // LINQ to find the window's FamilySymbol by its type name.
+            FamilySymbol familySymbol = (from fs in new FilteredElementCollector(doc).
+                                         OfClass(typeof(FamilySymbol)).
+                                         Cast<FamilySymbol>()
+                                         where (fs.Family.Name == fsFamilyName && fs.Name == fsName)
+                                         select fs).First();
 
-			//Find the hosting Wall (nearst wall to the insertion point)
 
-			Wall hostingWall = FindHostingWall(WallList, elementPoint);
+            //Find the hosting Wall (nearst wall to the insertion point)
 
-			
-			// Create Element.
-			using (Transaction t = new Transaction(doc, "Create Element"))
-				
-			{
-				t.Start();
+            Wall hostingWall = FindHostingWall(WallList, elementPoint);
 
-				if (!familySymbol.IsActive)
-				{
-					// Ensure the family symbol is activated.
-					familySymbol.Activate();
-					doc.Regenerate();
-				}
 
-				// Create Element
-				FamilyInstance element = doc.Create.NewFamilyInstance(elementPoint, familySymbol, hostingWall,
-				                                                      Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
-				t.Commit();
-			}
-			
-			//string prompt = "The element was created!";
-			//TaskDialog.Show("Revit", prompt);
-		}
-		
-		#region HelpFuncitons
-		public List<Wall> GetAllWallsInLevel(Document doc, Level level)
-		{
-			FilteredElementCollector collector = new FilteredElementCollector(doc);
-			collector.OfClass(typeof(Wall));
-			
-			List<Wall> walls = new List<Wall>();
-			walls = collector.Cast<Wall>().Where(wl => wl.LevelId == level.Id).ToList();
-			return walls;
-		}
-		
-		public Wall FindHostingWall(List<Wall> walls , XYZ elementPoint)
-		{
-			
-			Wall wall = null;
+            // Create Element.
+            using (Transaction trans = new Transaction(doc, "Create Element"))
 
-			double distance = double.MaxValue;
+            {
 
-			foreach (var w in walls)
-			{
-				double proximity = (w.Location as LocationCurve).Curve.Distance(elementPoint);
+                FailureHandlingOptions failureHandlingOptions
+                  = trans.GetFailureHandlingOptions();
 
-				if (proximity < distance)
-				{
-					distance = proximity;
-					wall = w;
-				}
-			}
-			
-			return wall;
-		}
-		#endregion
+                FailureHandler failureHandler
+                  = new FailureHandler();
+
+                failureHandlingOptions.SetFailuresPreprocessor(failureHandler);
+                failureHandlingOptions.SetClearAfterRollback(true);
+
+                trans.SetFailureHandlingOptions(failureHandlingOptions);
+                trans.Start();
+
+                if (!familySymbol.IsActive)
+                {
+                    // Ensure the family symbol is activated.
+                    familySymbol.Activate();
+                    doc.Regenerate();
+                }
+
+                // Create Element
+                FamilyInstance element = doc.Create.NewFamilyInstance(elementPoint, familySymbol, hostingWall,
+                                                                      Autodesk.Revit.DB.Structure.StructuralType.NonStructural);
+                trans.Commit();
+            }
+
+            //string prompt = "The element was created!";
+            //TaskDialog.Show("Revit", prompt);
+        }
+
+        #region HelpFuncitons
+        public List<Wall> GetAllWallsInLevel(Document doc, Level level)
+        {
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+            collector.OfClass(typeof(Wall));
+
+            List<Wall> walls = new List<Wall>();
+            walls = collector.Cast<Wall>().Where(wl => wl.LevelId == level.Id).ToList();
+            return walls;
+        }
+
+        public Wall FindHostingWall(List<Wall> walls, XYZ elementPoint)
+        {
+
+            Wall wall = null;
+
+            double distance = double.MaxValue;
+
+            foreach (var w in walls)
+            {
+                double proximity = (w.Location as LocationCurve).Curve.Distance(elementPoint);
+
+                if (proximity < distance)
+                {
+                    distance = proximity;
+                    wall = w;
+                }
+            }
+
+            return wall;
+        }
+        #endregion
 
         public static void readTxtFile(string pathToTxtFile,
                                        out List<List<double>> walls,
                                        out List<List<double>> doors,
                                        out List<List<double>> windows)
         {
-            
+
             walls = new List<List<double>>();
             doors = new List<List<double>>();
             windows = new List<List<double>>();
-            
-            string line;        
+
+            string line;
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
@@ -236,7 +255,7 @@ namespace RevitBatch
                     //List<string> dividedLine = line.Split('\t').Select(string.Parse).ToList();
                     if (dividedLine[4] == "door")
                     {
-                        insertNewData(ref doors, dividedLine); 
+                        insertNewData(ref doors, dividedLine);
                     }
                     else if (dividedLine[4] == "wall")
                     {
@@ -275,6 +294,6 @@ namespace RevitBatch
             //Add the converted list to the doors list of doubles
             list.Add(newDoubleList);
         }
-        
+
     }
 }
