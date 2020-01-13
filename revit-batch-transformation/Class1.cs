@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Architecture;
 using Autodesk.Revit.UI;
-using System.Diagnostics;
+using Autodesk.Revit.UI.Selection;
+using Autodesk.Revit.ApplicationServices;
+
 using System.IO;
 
 namespace RevitBatch
@@ -22,6 +25,13 @@ namespace RevitBatch
 
             UIApplication uiapp = commandData.Application;
             Application app = uiapp.Application;
+            UIDocument uiDoc = commandData.Application.ActiveUIDocument;
+
+
+
+            string promptm = "View Name: " + uiDoc.Document.ActiveView.Name;
+            TaskDialog.Show("Revit", promptm);
+
             try
             {
                 string dataDirectory = repoDirectory + @"\Data";
@@ -67,6 +77,9 @@ namespace RevitBatch
                     //Get all the walls from the model in the specified level
                     List<Wall> WallList = GetAllWallsInLevel(doc, level);
 
+                    string prompt0 = "Total Walls Count: " + WallList.Count;
+                    TaskDialog.Show("Revit", prompt0);
+
 
                     //Specify the family of the doors
                     string fsFamilyNameDoor = "M_Single-Flush";
@@ -99,7 +112,7 @@ namespace RevitBatch
 
                     //Create the Roof
                     RoofCreation(doc,
-                                  WallList, level);
+                                  WallList, level, commandData);
 
 
 
@@ -206,7 +219,7 @@ namespace RevitBatch
         }
 
         public void RoofCreation(Document doc,
-                                 List<Wall> WallList, Level level)
+                                 List<Wall> WallList, Level level, ExternalCommandData commandData)
         {
             // Get Level for roof, in our case level 2 is roof
             string levelName = "Level 2";
@@ -219,6 +232,12 @@ namespace RevitBatch
              !string.IsNullOrEmpty(e.Name)
              && e.Name.Equals(levelName))
             .FirstOrDefault<Element>() as Level;
+
+            
+            string prompt1 = "level2 Name: " + level2.Name;
+            TaskDialog.Show("Revit", prompt1);
+
+
 
             // Select roof type
             RoofType roofType
@@ -235,8 +254,9 @@ namespace RevitBatch
 
 
             // Get Outermost walls
-            List<Wall> ExteriorWalls;
-            ExteriorWalls = GetAllExteriorWalls(doc, level);
+            List<ElementId> ExteriorWalls;
+            //ExteriorWalls = GetAllExteriorWalls(doc, level);
+            ExteriorWalls = GetOuterWallByRoom( commandData, doc, level);
 
             string prompt = "Exterior Walls Count: "+ ExteriorWalls.Count;
             TaskDialog.Show("Revit", prompt);
@@ -245,9 +265,12 @@ namespace RevitBatch
             // Go through the outer walls
             if (ExteriorWalls.Count != 0)
             {
-                foreach(Wall wall in ExteriorWalls)
+                foreach(ElementId id in ExteriorWalls)
                 {
-                    if(wall != null)
+                    Element element = doc.GetElement(id);
+                    Wall wall = element as Wall;
+
+                    if (wall != null)
                     {
                         LocationCurve wallCurve = wall.Location as LocationCurve;
                         footprint.Append(wallCurve.Curve);
@@ -440,9 +463,190 @@ namespace RevitBatch
                IsExterior(w.WallType));
 
             List<Wall> walls = new List<Wall>();
-            walls = collector.Cast<Wall>().Where(wl => wl.LevelId == level.Id).ToList();
+            walls = collector.Cast<Wall>().ToList();
             return walls;
         }
+
+        // Adding code to Search for exterior walls
+        private List<ElementId> GetOuterWallByRoom(ExternalCommandData commandData, Document doc, Level level1)
+        {
+           // this.commandData = commandData;
+            UIDocument uiDoc = commandData.Application.ActiveUIDocument;
+            Autodesk.Revit.ApplicationServices.Application app = commandData.Application.Application;
+
+            //this.doc = uiDoc.Document;
+            //Selection sel = uiDoc.Selection;
+
+            double offset = 1000 / 304.8;
+
+            List<Wall> wallList = new FilteredElementCollector(doc).OfClass(typeof(Wall)).Cast<Wall>().ToList();
+            double maxX = -1D;
+            double minX = -1D;
+            double maxY = -1D;
+            double minY = -1D;
+            wallList.ForEach((wall) =>
+            {
+                Curve curve = (wall.Location as LocationCurve).Curve;
+                XYZ xyz1 = curve.GetEndPoint(0);
+                XYZ xyz2 = curve.GetEndPoint(1);
+
+                double _minX = Math.Min(xyz1.X, xyz2.X);
+                double _maxX = Math.Max(xyz1.X, xyz2.X);
+                double _minY = Math.Min(xyz1.Y, xyz2.Y);
+                double _maxY = Math.Max(xyz1.Y, xyz2.Y);
+
+                if (curve.IsCyclic)
+                {
+                    Arc arc = curve as Arc;
+                    double _radius = arc.Radius;
+                    //粗略对x和y 加/减
+                    _maxX += _radius;
+                    _minX -= _radius;
+                    _maxY += _radius;
+                    _minY += _radius;
+                }
+
+                if (minX == -1) minX = _minX;
+                if (maxX == -1) maxX = _maxX;
+                if (maxY == -1) maxY = _maxY;
+                if (minY == -1) minY = _minY;
+
+                if (_minX < minX) minX = _minX;
+                if (_maxX > maxX) maxX = _maxX;
+                if (_maxY > maxY) maxY = _maxY;
+                if (_minY < minY) minY = _minY;
+            });
+            minX -= offset;
+            maxX += offset;
+            minY -= offset;
+            maxY += offset;
+
+            CurveArray curves = new CurveArray();
+            Line line1 = Line.CreateBound(new XYZ(minX, maxY, 0), new XYZ(maxX, maxY, 0));
+            Line line2 = Line.CreateBound(new XYZ(maxX, maxY, 0), new XYZ(maxX, minY, 0));
+            Line line3 = Line.CreateBound(new XYZ(maxX, minY, 0), new XYZ(minX, minY, 0));
+            Line line4 = Line.CreateBound(new XYZ(minX, minY, 0), new XYZ(minX, maxY, 0));
+            curves.Append(line1); curves.Append(line2); curves.Append(line3); curves.Append(line4);
+            Transaction transaction = new Transaction(doc, "createNewRoomBoundaryLines");
+            transaction.Start();
+            View view = uiDoc.ActiveView;
+            var arbitaryFloorPlan = new FilteredElementCollector(doc).OfClass(typeof(ViewPlan)).Cast<ViewPlan>().Where(x => !x.IsTemplate).FirstOrDefault();
+            view = arbitaryFloorPlan;
+
+
+            string prompt = "View Name: " + view.Name;
+            TaskDialog.Show("Revit", prompt);
+
+            SketchPlane sketchPlane = SketchPlane.Create(doc, level1.Id);
+
+            ModelCurveArray modelCaRoomBoundaryLines = doc.Create.NewRoomBoundaryLines(sketchPlane, curves, view);
+
+            Room newRoom = null;
+            RoomTag tag1 = null;
+            if (true)
+            {
+                //创建房间的坐标点
+                XYZ point = new XYZ(minX + 600 / 304.8, maxY - 600 / 304.8, 0);
+
+                //根据选中点，创建房间   当前视图的楼层doc.ActiveView.GenLevel
+                newRoom = doc.Create.NewRoom(view.GenLevel, new UV(point.X, point.Y));
+
+                if (newRoom == null)
+                {
+                    string msg = "Error Message, New Room is null";
+                    TaskDialog.Show("xx", msg);
+                    transaction.RollBack();
+                    return null;
+                }
+                tag1 = doc.Create.NewRoomTag(new LinkElementId(newRoom.Id), new UV(point.X, point.Y), view.Id);
+            }
+            transaction.Commit();
+
+            
+            List<ElementId> elemengIds = DetermineAdjacentElementLengthsAndWallAreas(newRoom, doc);
+
+            #region 删除临时创建的房间,模型线
+            transaction = new Transaction(doc, "deleteX");
+            transaction.Start();
+            doc.Delete(tag1.Id);
+            doc.Delete(newRoom.Id);
+            foreach (ModelCurve item in modelCaRoomBoundaryLines)
+            {
+                doc.Delete(item.Id);
+            }
+            transaction.Commit();
+            #endregion
+
+            //sel.SetElementIds(elemengIds);
+            return elemengIds;
+        }
+
+
+
+        List<ElementId> DetermineAdjacentElementLengthsAndWallAreas(Room room, Document doc)
+        {
+            List<ElementId> elementIds = new List<ElementId>();
+
+            IList<IList<BoundarySegment>> boundaries
+              = room.GetBoundarySegments(new SpatialElementBoundaryOptions());
+
+            int n = boundaries.Count;//.Size;
+
+            //Debug.Print(
+            //  "{0} has {1} boundar{2}{3}",
+            //  Util.ElementDescription(room),
+            //  n, Util.PluralSuffixY(n),
+            //  Util.DotOrColon(n));
+
+            int iBoundary = 0, iSegment;
+
+            foreach (IList<BoundarySegment> b in boundaries)
+            {
+                ++iBoundary;
+                iSegment = 0;
+                foreach (BoundarySegment s in b)
+                {
+                    ++iSegment;
+                    //Element neighbour = s.Element;
+                    Element neighbour = doc.GetElement(s.ElementId);// s.Element;
+                    Curve curve = s.GetCurve();//.Curve;
+                    double length = curve.Length;
+
+                    //Debug.Print(
+                    //  "  Neighbour {0}:{1} {2} has {3}"
+                    //  + " feet adjacent to room.",
+                    //  iBoundary, iSegment,
+                    //  Util.ElementDescription(neighbour),
+                    //  Util.RealString(length));
+
+                    if (neighbour is Wall)
+                    {
+                        Wall wall = neighbour as Wall;
+
+                        Parameter p = wall.get_Parameter(
+                          BuiltInParameter.HOST_AREA_COMPUTED);
+
+                        double area = p.AsDouble();
+
+                        LocationCurve lc
+                          = wall.Location as LocationCurve;
+
+                        double wallLength = lc.Curve.Length;
+
+                        //Debug.Print(
+                        //  "    This wall has a total length"
+                        //  + " and area of {0} feet and {1}"
+                        //  + " square feet.",
+                        //  Util.RealString(wallLength),
+                        //  Util.RealString(area));
+
+                        elementIds.Add(wall.Id);
+                    }
+                }
+            }
+            return elementIds;
+        }
+        // Added code ends here
 
     }
 }
