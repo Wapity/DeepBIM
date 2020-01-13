@@ -5,6 +5,7 @@ using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using System.Diagnostics;
 using System.IO;
 
 namespace RevitBatch
@@ -17,7 +18,7 @@ namespace RevitBatch
         {
             string homeDirectory = Environment.GetEnvironmentVariable("HOMEPATH");
             // CHANGE PATH
-            string repoDirectory = @"C:\Users\gunther\dev\DeepBim";
+            string repoDirectory = @"C:\UserData\z0044dcu\Documents\GitHub\private\DeepBIM";
 
             UIApplication uiapp = commandData.Application;
             Application app = uiapp.Application;
@@ -91,6 +92,18 @@ namespace RevitBatch
                                           WallList, level,
                                           windowData[0], windowData[1], windowData[2], windowData[3]);
                     }
+
+                    string prompt = "Going to start creating roof";
+                    TaskDialog.Show("Revit", prompt);
+               
+
+                    //Create the Roof
+                    RoofCreation(doc,
+                                  WallList, level);
+
+
+
+                    // Finishing up and saving changes
                     doc.SaveAs(dataFile + ".rvt");
                     doc.Close(false);
                 }
@@ -101,12 +114,12 @@ namespace RevitBatch
             catch (Exception e)
             {
                 // this shows the whole error message in Revit
-                throw (e);
-                /*
+                //throw (e);
+                
                 string prompt = e.Message + "\n" + e.StackTrace;
-				TaskDialog.Show("Revit", prompt);;
+				TaskDialog.Show("Revit", prompt);
                 return Result.Failed;	
-                */
+                
             }
         }
 
@@ -192,8 +205,112 @@ namespace RevitBatch
             //TaskDialog.Show("Revit", prompt);
         }
 
-        #region HelpFuncitons
-        public List<Wall> GetAllWallsInLevel(Document doc, Level level)
+        public void RoofCreation(Document doc,
+                                 List<Wall> WallList, Level level)
+        {
+            // Get Level for roof, in our case level 2 is roof
+            string levelName = "Level 2";
+            // LINQ to find the level by its name.
+
+            Level level2
+             = new FilteredElementCollector(doc)
+            .OfClass(typeof(Level))
+             .Where<Element>(e =>
+             !string.IsNullOrEmpty(e.Name)
+             && e.Name.Equals(levelName))
+            .FirstOrDefault<Element>() as Level;
+
+            // Select roof type
+            RoofType roofType
+            = new FilteredElementCollector(doc)
+            .OfClass(typeof(RoofType))
+            .FirstOrDefault<Element>() as RoofType;
+
+            // Get the handle of the application
+            Application application = doc.Application;
+
+            // Define the footprint for the roof based on our future selection (exterior walls)
+            CurveArray footprint = application.Create
+              .NewCurveArray();
+
+
+            // Get Outermost walls
+            List<Wall> ExteriorWalls;
+            ExteriorWalls = GetAllExteriorWalls(doc, level);
+
+            string prompt = "Exterior Walls Count: "+ ExteriorWalls.Count;
+            TaskDialog.Show("Revit", prompt);
+
+
+            // Go through the outer walls
+            if (ExteriorWalls.Count != 0)
+            {
+                foreach(Wall wall in ExteriorWalls)
+                {
+                    if(wall != null)
+                    {
+                        LocationCurve wallCurve = wall.Location as LocationCurve;
+                        footprint.Append(wallCurve.Curve);
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception(
+                "Please select a curve loop, wall loop or "
+                + "combination of walls and curves to "
+                + "create a footprint roof.");
+            }
+
+            //Do the mapping
+            ModelCurveArray footPrintToModelCurveMapping
+             = new ModelCurveArray();
+
+            // Create Element Roof
+            using (Transaction trans = new Transaction(doc, "Create Roof"))
+
+            {
+
+                FailureHandlingOptions failureHandlingOptions
+                  = trans.GetFailureHandlingOptions();
+
+                FailureHandler failureHandler
+                  = new FailureHandler();
+
+                failureHandlingOptions.SetFailuresPreprocessor(failureHandler);
+                failureHandlingOptions.SetClearAfterRollback(true);
+
+                trans.SetFailureHandlingOptions(failureHandlingOptions);
+                trans.Start();
+
+                // Create Roof
+                FootPrintRoof footprintRoof
+              = doc.Create.NewFootPrintRoof(
+                footprint, level2, roofType,
+                out footPrintToModelCurveMapping);
+
+                ModelCurveArrayIterator iterator
+                  = footPrintToModelCurveMapping.ForwardIterator();
+
+                iterator.Reset();
+                while (iterator.MoveNext())
+                {
+                    ModelCurve modelCurve = iterator.Current as ModelCurve;
+                    footprintRoof.set_DefinesSlope(modelCurve, true);
+                    footprintRoof.set_SlopeAngle(modelCurve, 0.5);
+                }
+
+                trans.Commit();
+            }
+
+            
+
+
+        }
+
+            #region HelpFuncitons
+            public List<Wall> GetAllWallsInLevel(Document doc, Level level)
         {
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             collector.OfClass(typeof(Wall));
@@ -293,6 +410,38 @@ namespace RevitBatch
             var newDoubleList = doubleList.Select(x => x / 3.048).ToList();
             //Add the converted list to the doors list of doubles
             list.Add(newDoubleList);
+        }
+
+        // Helper functions added by Haider:
+
+        /// <summary>
+        /// Wall type predicate for exterior wall function
+        /// </summary>
+        bool IsExterior(WallType wallType)
+        {
+            Parameter p = wallType.get_Parameter(
+              BuiltInParameter.FUNCTION_PARAM);
+
+            Debug.Assert(null != p, "expected wall type "
+              + "to have wall function parameter");
+
+            WallFunction f = (WallFunction)p.AsInteger();
+
+            return WallFunction.Exterior == f;
+        }
+
+        List<Wall> GetAllExteriorWalls(
+     Document doc, Level level)
+        {
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+              collector.OfClass(typeof(Wall))
+              .Cast<Wall>()
+              .Where<Wall>(w =>
+               IsExterior(w.WallType));
+
+            List<Wall> walls = new List<Wall>();
+            walls = collector.Cast<Wall>().Where(wl => wl.LevelId == level.Id).ToList();
+            return walls;
         }
 
     }
