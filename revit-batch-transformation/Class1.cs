@@ -497,7 +497,7 @@ namespace RevitBatch
                 {
                     Arc arc = curve as Arc;
                     double _radius = arc.Radius;
-                    //粗略对x和y 加/减
+                 
                     _maxX += _radius;
                     _minX -= _radius;
                     _maxY += _radius;
@@ -543,10 +543,10 @@ namespace RevitBatch
             RoomTag tag1 = null;
             if (true)
             {
-                //创建房间的坐标点
+        
                 XYZ point = new XYZ(minX + 600 / 304.8, maxY - 600 / 304.8, 0);
 
-                //根据选中点，创建房间   当前视图的楼层doc.ActiveView.GenLevel
+               
                 newRoom = doc.Create.NewRoom(view.GenLevel, new UV(point.X, point.Y));
 
                 if (newRoom == null)
@@ -563,7 +563,7 @@ namespace RevitBatch
             
             List<ElementId> elemengIds = DetermineAdjacentElementLengthsAndWallAreas(newRoom, doc);
 
-            #region 删除临时创建的房间,模型线
+            
             transaction = new Transaction(doc, "deleteX");
             transaction.Start();
             doc.Delete(tag1.Id);
@@ -573,7 +573,7 @@ namespace RevitBatch
                 doc.Delete(item.Id);
             }
             transaction.Commit();
-            #endregion
+      
 
             //sel.SetElementIds(elemengIds);
             return elemengIds;
@@ -631,8 +631,8 @@ namespace RevitBatch
 
                         double wallLength = lc.Curve.Length;
 
-                        string promptm = "iSegment: " + iSegment +"\n This Wall has total length: " + wallLength + "\n Wall Id: " + wall.Id;
-                        TaskDialog.Show("Revit", promptm);
+                        //string promptm = "iSegment: " + iSegment +"\n This Wall has total length: " + wallLength + "\n Wall Id: " + wall.Id;
+                        //TaskDialog.Show("Revit", promptm);
 
 
                         //Debug.Print(
