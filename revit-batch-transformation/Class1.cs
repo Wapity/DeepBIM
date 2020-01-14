@@ -29,9 +29,7 @@ namespace RevitBatch
 
 
 
-            string promptm = "View Name: " + uiDoc.Document.ActiveView.Name;
-            TaskDialog.Show("Revit", promptm);
-
+            
             try
             {
                 string dataDirectory = repoDirectory + @"\Data";
@@ -633,6 +631,10 @@ namespace RevitBatch
 
                         double wallLength = lc.Curve.Length;
 
+                        string promptm = "iSegment: " + iSegment +"\n This Wall has total length: " + wallLength + "\n Wall Id: " + wall.Id;
+                        TaskDialog.Show("Revit", promptm);
+
+
                         //Debug.Print(
                         //  "    This wall has a total length"
                         //  + " and area of {0} feet and {1}"
@@ -644,6 +646,7 @@ namespace RevitBatch
                     }
                 }
             }
+            elementIds.RemoveAt(1);
             return elementIds;
         }
         // Added code ends here
