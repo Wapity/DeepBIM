@@ -1,6 +1,6 @@
 import re
 
-"""Extactor of heating/cooling load and parameters for one building from html Revit report"""
+"""Extactor of heating/cooling load and parameters for one building from html Revit 'detailed' report"""
 
 def html_single_extractor(text, get_keys = False):
     dict_result = {}
