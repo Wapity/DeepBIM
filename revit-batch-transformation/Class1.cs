@@ -527,9 +527,9 @@ namespace RevitBatch
             curves.Append(line1); curves.Append(line2); curves.Append(line3); curves.Append(line4);
             Transaction transaction = new Transaction(doc, "createNewRoomBoundaryLines");
             transaction.Start();
-            View view = uiDoc.ActiveView;
+            //View view = uiDoc.ActiveView;
             var arbitaryFloorPlan = new FilteredElementCollector(doc).OfClass(typeof(ViewPlan)).Cast<ViewPlan>().Where(x => !x.IsTemplate).FirstOrDefault();
-            view = arbitaryFloorPlan;
+            View view = arbitaryFloorPlan;
 
 
             string prompt = "View Name: " + view.Name;
@@ -646,7 +646,7 @@ namespace RevitBatch
                     }
                 }
             }
-            elementIds.RemoveAt(1);
+            //elementIds.RemoveAt(1);
             return elementIds;
         }
         // Added code ends here
