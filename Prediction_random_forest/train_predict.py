@@ -15,10 +15,10 @@ X,data = process(path_data,training=False)
 
 #Parameters for grid search
 param_grid = {'max_features':['auto', 'log2'], 'max_depth':[5]}
-#max depth 5,10,15,20,30,50,60
+#max depth 5,10,15,20,30,50,60 to try with real data
 
 """ Model Cooling """
-model1 = RandomForestRegressor( random_state=5, n_estimators= 700, n_jobs = -1)
+model1 = RandomForestRegressor(random_state=5, n_estimators= 700, n_jobs = -1)
 grid_search_rf = MultiOutputRegressor(GridSearchCV(model1, param_grid, cv= 5,return_train_score=True,verbose = 2))
 grid_search_rf.fit(X_train_div, y1_train)
 
@@ -33,7 +33,7 @@ cooling_pred = grid_search_rf.predict(X)
 prediction_cooling = pd.DataFrame(cooling_pred, columns=['Cooling_Load']).to_csv('data/predictions_cooling.csv')
 
 """ Model Heating """
-model2 = RandomForestRegressor( random_state=5, n_estimators= 700, n_jobs = -1)
+model2 = RandomForestRegressor(random_state=5, n_estimators= 700, n_jobs = -1)
 grid_search_rf2 = MultiOutputRegressor(GridSearchCV(model2, param_grid, cv= 5,return_train_score=True, verbose =2))
 grid_search_rf2.fit(X_train_div, y2_train)
 
