@@ -21,7 +21,9 @@ namespace RevitBatch
         {
             string homeDirectory = Environment.GetEnvironmentVariable("HOMEPATH");
             // CHANGE PATH
-            string repoDirectory = @"C:\UserData\z0044dcu\Documents\GitHub\private\DeepBIM";
+            //string repoDirectory = @"C:\UserData\z0044dcu\Documents\GitHub\private\DeepBIM";
+            string repoDirectory = @"C:\Users\gunther\dev\DeepBIM";
+
 
             UIApplication uiapp = commandData.Application;
             Application app = uiapp.Application;
@@ -33,6 +35,7 @@ namespace RevitBatch
             try
             {
                 string dataDirectory = repoDirectory + @"\Data";
+                //string dataDirectory = @"C:\Users\gunther\dev\DeepBIM\Data\00\00\081549d99cf1e3f5be593e560799";
                 string[] dataFiles =
                     Directory.GetFiles(dataDirectory, "*.txt", SearchOption.AllDirectories);
                 foreach (string dataFile in dataFiles)
@@ -104,18 +107,28 @@ namespace RevitBatch
                                           windowData[0], windowData[1], windowData[2], windowData[3]);
                     }
 
-                    string prompt = "Going to start creating roof";
+                    string prompt = $"Going to start creating roof for file {dataFile}";
                     TaskDialog.Show("Revit", prompt);
-               
+
 
                     //Create the Roof
-                    RoofCreation(doc,
-                                  WallList, level, commandData);
+                    // Remove try/catch if you want to see the error message in revit
+                    try
+                    {
+                        RoofCreation(doc,
+                                      WallList, level, commandData);
+                    }
+                    catch
+                    {
+                        TaskDialog.Show("Revit", "Failed Roof creation");
+                    }
 
 
 
                     // Finishing up and saving changes
-                    doc.SaveAs(dataFile + ".rvt");
+                    SaveAsOptions overwrite = new SaveAsOptions();
+                    overwrite.OverwriteExistingFile = true;
+                    doc.SaveAs(dataFile + ".rvt", overwrite);
                     doc.Close(false);
                 }
                 TaskDialog.Show("Revit", "Success!"); ;
@@ -428,7 +441,7 @@ namespace RevitBatch
             List<double> doubleList = data.Select(x => double.Parse(x, System.Globalization.CultureInfo.InvariantCulture)).ToList();
             //Dividing every element by the unit convertion factor 
             //(1feet = 3.048 dm) (the coordinates in the text file are in dm 
-            var newDoubleList = doubleList.Select(x => x / 3.048).ToList();
+            var newDoubleList = doubleList.Select(x => Math.Round(x / 3.048)).ToList();
             //Add the converted list to the doors list of doubles
             list.Add(newDoubleList);
         }
