@@ -31,31 +31,32 @@ namespace RevitBatch
 
 
 
-            
+
             try
             {
                 string dataDirectory = repoDirectory + @"\Data";
-                //string dataDirectory = @"C:\Users\gunther\dev\DeepBIM\Data\00\00\081549d99cf1e3f5be593e560799";
                 string[] dataFiles =
                     Directory.GetFiles(dataDirectory, "*.txt", SearchOption.AllDirectories);
+                System.IO.StreamWriter failLogFile =
+                            new System.IO.StreamWriter(@"C:\Users\gunther\dev\DeepBIM\Data\failing.txt", false);
+                System.IO.StreamWriter successLogFile =
+                            new System.IO.StreamWriter(@"C:\Users\gunther\dev\DeepBIM\Data\success.txt", false);
                 foreach (string dataFile in dataFiles)
                 {
                     //Document doc = app.NewProjectDocument(UnitSystem.Metric);
                     // This template is needed to have the families for windows, doors available
                     // CHANGE PATH
                     Document doc = app.NewProjectDocument("C:\\ProgramData\\Autodesk\\RVT 2019\\Templates\\Generic\\Default_M_ENU.rte");
-                    /*
-                    Transaction t = new Transaction(doc);
-                    t.Start("Add Level");
-                    Level level = Level.Create(doc, 0);
-                    t.Commit();
-                    */
+
                     List<List<double>> walls;
                     List<List<double>> doors;
                     List<List<double>> windows;
 
                     readTxtFile(dataFile, out walls, out doors, out windows);
-
+                    // connect dead ends of walls to nearest wall endpoint
+                    connectUnconnectedWalls(walls);
+                    // separate walls, if they intersect into nonintersecting parts
+                    walls = separateWalls(walls);
 
                     //If you want to change the level where the object will be created, just chance the next variable.
                     string levelName = "Level 1";
@@ -79,7 +80,7 @@ namespace RevitBatch
                     List<Wall> WallList = GetAllWallsInLevel(doc, level);
 
                     string prompt0 = "Total Walls Count: " + WallList.Count;
-                    TaskDialog.Show("Revit", prompt0);
+                    //TaskDialog.Show("Revit", prompt0);
 
 
                     //Specify the family of the doors
@@ -108,7 +109,7 @@ namespace RevitBatch
                     }
 
                     string prompt = $"Going to start creating roof for file {dataFile}";
-                    TaskDialog.Show("Revit", prompt);
+                    //TaskDialog.Show("Revit", prompt);
 
 
                     //Create the Roof
@@ -117,10 +118,14 @@ namespace RevitBatch
                     {
                         RoofCreation(doc,
                                       WallList, level, commandData);
+                        successLogFile.WriteLine(dataFile);
+                        successLogFile.Flush();
                     }
                     catch
                     {
-                        TaskDialog.Show("Revit", "Failed Roof creation");
+                        failLogFile.WriteLine(dataFile);
+                        failLogFile.Flush();
+                        //TaskDialog.Show("Revit", "Failed Roof creation");
                     }
 
 
@@ -131,14 +136,16 @@ namespace RevitBatch
                     doc.SaveAs(dataFile + ".rvt", overwrite);
                     doc.Close(false);
                 }
-                TaskDialog.Show("Revit", "Success!"); ;
+                failLogFile.Close();
+                successLogFile.Close();
+                //TaskDialog.Show("Revit", "Success!"); ;
                 return Result.Succeeded;
             }
 
             catch (Exception e)
             {
                 // this shows the whole error message in Revit
-                //throw (e);
+                // throw (e);
                 
                 string prompt = e.Message + "\n" + e.StackTrace;
 				TaskDialog.Show("Revit", prompt);
@@ -246,7 +253,7 @@ namespace RevitBatch
 
             
             string prompt1 = "level2 Name: " + level2.Name;
-            TaskDialog.Show("Revit", prompt1);
+            //TaskDialog.Show("Revit", prompt1);
 
 
 
@@ -270,7 +277,7 @@ namespace RevitBatch
             ExteriorWalls = GetOuterWallByRoom( commandData, doc, level);
 
             string prompt = "Exterior Walls Count: "+ ExteriorWalls.Count;
-            TaskDialog.Show("Revit", prompt);
+            //TaskDialog.Show("Revit", prompt);
 
 
             // Go through the outer walls
@@ -446,6 +453,167 @@ namespace RevitBatch
             list.Add(newDoubleList);
         }
 
+        // geometry helper functions
+        static double dist(List<double> p, List<double> q)
+        {
+            return Math.Sqrt(Math.Pow(p[0] - q[0], 2) + Math.Pow(p[1] - q[1], 2));
+        }
+        static bool btw(double x, double a, double b)
+        {
+            bool a_b = a <= b && a <= x && x <= b;
+            bool b_a = b <= a && b <= x && x <= a;
+            return (a_b || b_a);
+        }
+        static bool onSegment(double px, double py, double ax, double ay, double bx, double by)
+        {
+            return (btw(px, ax, bx) && btw(py, ay, by));
+        }
+        static List<double> intersect(List<double> wall1, List<double> wall2)
+        {
+            // a-b and c-d parrallel
+            if ((wall1[3] - wall1[1]) * (wall2[2] - wall2[0]) == (wall1[2] - wall1[0]) * (wall2[3] - wall2[1]))
+            {
+                List<double> noIntersection = new List<double>();
+                return noIntersection;
+            }
+            double px_numerator = (wall1[2] - wall1[0]) * (wall2[0] * wall2[3] - wall2[2] * wall2[1]) -
+              (wall2[2] - wall2[0]) * (wall1[0] * wall1[3] - wall1[2] * wall1[1]);
+            double px_denom = (wall1[2] - wall1[0]) * (wall2[3] - wall2[1]) - (wall1[3] - wall1[1]) * (wall2[2] - wall2[0]);
+            double px = px_numerator / px_denom;
+
+            double py_numerator = (wall1[3] - wall1[1]) * (wall2[0] * wall2[3] - wall2[2] * wall2[1]) - (wall2[3] - wall2[1]) * (wall1[0] * wall1[3] - wall1[2] * wall1[1]);
+            double py_denom = px_denom;
+            double py = py_numerator / py_denom;
+
+            if (!onSegment(px, py, wall1[0], wall1[1], wall1[2], wall1[3]) ||
+                !onSegment(px, py, wall2[0], wall2[1], wall2[2], wall2[3]))
+            {
+                List<double> noIntersection = new List<double>();
+                return noIntersection;
+            }
+            return new List<double> { px, py };
+        }
+        static List<List<double>> separateWalls(List<List<double>> walls)
+        {
+            // track all intersections for every wall
+            List<List<List<double>>> intersections = new List<List<List<double>>>();
+            for(int i = 0; i < walls.Count; i++)
+            {
+                intersections.Add(new List<List<double>>());
+            }
+            for(int i = 0; i < walls.Count; i++)
+            {
+                List<double> wall1 = walls[i];
+                for(int j = i+1; j < walls.Count; j++)
+                {
+                    List<double> wall2 = walls[j];
+                    List<double> intersection = intersect(wall1, wall2);
+                    if(intersection.Count > 0)
+                    {
+                        List<double> copy = intersection.ToList();
+                        intersections[i].Add(intersection);
+                        intersections[j].Add(copy);
+                    }
+                }
+            }
+
+            // new list of separated / intersection free walls
+            List<List<double>> separated = new List<List<double>>();
+            // separate every wall i at every intersections[i]
+            for(int i = 0; i < walls.Count; i++)
+            {
+                List<double> wall = walls[i];
+                List<double> wallStart = wall.GetRange(0, 2);
+                List<List<double>> wallIntersections = intersections[i];
+                wallIntersections.Sort((p, q) =>
+                    (int)Math.Round(dist(p, wallStart) - dist(q, wallStart), MidpointRounding.AwayFromZero));
+                wallIntersections.Prepend(wallStart);
+                wallIntersections.Add(wall.GetRange(2, 2));
+                for (int j = 0; j < wallIntersections.Count - 1; j += 1)
+                {
+                    List<double> start = wallIntersections[j];
+                    List<double> end = wallIntersections[j+1];
+                    if(dist(start, end) > 0.00001)
+                    {
+                        start.AddRange(end);
+                        Console.WriteLine($"{start[0]}, {start[1]}, {start[2]}, {start[3]}");
+                        separated.Add(start);
+                    }
+                }
+            }
+            return separated;
+        }
+
+        static void connectUnconnectedWalls(List<List<double>> walls)
+        {
+            for(int i = 0; i < walls.Count; i++)
+            {
+                List<bool> connected = new List<bool> { false, false };
+                for(int j = 0; j < walls.Count; j++)
+                {
+                    if(i != j)
+                    {
+                        for(int k = 0; k <= 1; k++)
+                        {
+                            for(int l = 0; l <= 1; l++)
+                            {
+                                if(dist(walls[i].GetRange(2*k,2), walls[j].GetRange(2*l,2)) == 0)
+                                {
+                                    connected[k] = true;
+                                }
+                            }
+                        }
+                    }
+                    if (connected[0] && connected[1])
+                    {
+                        break;
+                    }
+                }
+                if(!connected[0])
+                {
+                    List<double> nearest = getNearest(walls, i, 0);
+                    walls[i][0] = nearest[0];
+                    walls[i][1] = nearest[1];
+                }
+                if(!connected[1])
+                {
+                    List<double> nearest = getNearest(walls, i, 1);
+                    walls[i][2] = nearest[0];
+                    walls[i][3] = nearest[1];
+                }
+            }
+        }
+        static List<double> getNearest(List<List<double>> walls, int wallIndex, int wallPoint)
+        {
+            double min = Double.PositiveInfinity;
+            List<double> p = walls[wallIndex].GetRange(2 * wallPoint, 2);
+            int nearestWallIndex = -1;
+            int nearestWallPoint = -1;
+            for(int i = 0; i < walls.Count; i++)
+            {
+                if(i != wallIndex)
+                {
+                    List<double> wall = walls[i];
+                    for(int k = 0; k <= 1; k++)
+                    {
+                        double d = dist(p, wall.GetRange(2 * k, 2));
+                        if(d < min)
+                        {
+                            min = d;
+                            nearestWallIndex = i;
+                            nearestWallPoint = k;
+                        }
+                    }
+                }
+            }
+            if(nearestWallIndex == -1)
+            {
+                return null;
+            }
+            return walls[nearestWallIndex].GetRange(2 * nearestWallPoint, 2);
+        }
+
+
         // Helper functions added by Haider:
 
         /// <summary>
@@ -546,7 +714,7 @@ namespace RevitBatch
 
 
             string prompt = "View Name: " + view.Name;
-            TaskDialog.Show("Revit", prompt);
+            //TaskDialog.Show("Revit", prompt);
 
             SketchPlane sketchPlane = SketchPlane.Create(doc, level1.Id);
 
@@ -565,7 +733,7 @@ namespace RevitBatch
                 if (newRoom == null)
                 {
                     string msg = "Error Message, New Room is null";
-                    TaskDialog.Show("xx", msg);
+                    //TaskDialog.Show("xx", msg);
                     transaction.RollBack();
                     return null;
                 }
