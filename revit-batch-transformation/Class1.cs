@@ -21,8 +21,8 @@ namespace RevitBatch
         {
             string homeDirectory = Environment.GetEnvironmentVariable("HOMEPATH");
             // CHANGE PATH
-            //string repoDirectory = @"C:\UserData\z0044dcu\Documents\GitHub\private\DeepBIM";
-            string repoDirectory = @"C:\Users\gunther\dev\DeepBIM";
+            string repoDirectory = @"C:\UserData\z0044dcu\Documents\GitHub\private\DeepBIM";
+            //string repoDirectory = @"C:\Users\gunther\dev\DeepBIM";
 
 
             UIApplication uiapp = commandData.Application;
@@ -38,9 +38,9 @@ namespace RevitBatch
                 string[] dataFiles =
                     Directory.GetFiles(dataDirectory, "*.txt", SearchOption.AllDirectories);
                 System.IO.StreamWriter failLogFile =
-                            new System.IO.StreamWriter(@"C:\Users\gunther\dev\DeepBIM\Data\failing.txt", false);
+                            new System.IO.StreamWriter(dataDirectory + @"\failing.txt", false);
                 System.IO.StreamWriter successLogFile =
-                            new System.IO.StreamWriter(@"C:\Users\gunther\dev\DeepBIM\Data\success.txt", false);
+                            new System.IO.StreamWriter(dataDirectory + @"\success.txt", false);
                 foreach (string dataFile in dataFiles)
                 {
                     //Document doc = app.NewProjectDocument(UnitSystem.Metric);
@@ -111,22 +111,43 @@ namespace RevitBatch
                     string prompt = $"Going to start creating roof for file {dataFile}";
                     //TaskDialog.Show("Revit", prompt);
 
+                    //Get Exterior Walls selection:
+                    // Get Outermost walls
+                    List<ElementId> ExteriorWalls;
+                    //ExteriorWalls = GetAllExteriorWalls(doc, level);
+                    ExteriorWalls = GetOuterWallByRoom(commandData, doc, level);
+
 
                     //Create the Roof
                     // Remove try/catch if you want to see the error message in revit
                     try
                     {
                         RoofCreation(doc,
-                                      WallList, level, commandData);
-                        successLogFile.WriteLine(dataFile);
+                                      ExteriorWalls, level, commandData);
+                        successLogFile.WriteLine(dataFile + " ROOF ADDED");
                         successLogFile.Flush();
                     }
                     catch
                     {
-                        failLogFile.WriteLine(dataFile);
+                        failLogFile.WriteLine(dataFile + " ROOF FAILED");
                         failLogFile.Flush();
                         //TaskDialog.Show("Revit", "Failed Roof creation");
                     }
+
+                    //Create Floor
+                    //try
+                    //{
+                        FloorCreation(doc,
+                                      ExteriorWalls, level, commandData);
+                   /*     successLogFile.WriteLine(dataFile + " FLOOR ADDED");
+                        successLogFile.Flush();
+                    }
+                    catch
+                    {
+                        failLogFile.WriteLine(dataFile + " FLOOR FAILED");
+                        failLogFile.Flush();
+                        //TaskDialog.Show("Revit", "Failed Roof creation");
+                    }*/
 
 
 
@@ -237,7 +258,7 @@ namespace RevitBatch
         }
 
         public void RoofCreation(Document doc,
-                                 List<Wall> WallList, Level level, ExternalCommandData commandData)
+                                 List<ElementId> ExteriorWalls, Level level, ExternalCommandData commandData)
         {
             // Get Level for roof, in our case level 2 is roof
             string levelName = "Level 2";
@@ -272,12 +293,12 @@ namespace RevitBatch
 
 
             // Get Outermost walls
-            List<ElementId> ExteriorWalls;
+           // List<ElementId> ExteriorWalls;
             //ExteriorWalls = GetAllExteriorWalls(doc, level);
-            ExteriorWalls = GetOuterWallByRoom( commandData, doc, level);
+           // ExteriorWalls = GetOuterWallByRoom( commandData, doc, level);
 
             string prompt = "Exterior Walls Count: "+ ExteriorWalls.Count;
-            //TaskDialog.Show("Revit", prompt);
+            TaskDialog.Show("Revit", prompt);
 
 
             // Go through the outer walls
@@ -343,9 +364,103 @@ namespace RevitBatch
                 }
 
                 trans.Commit();
+
             }
 
             
+
+
+        }
+
+        public void FloorCreation(Document doc, List<ElementId> ExteriorWalls, Level level, ExternalCommandData commandData)
+        {
+
+            FloorType floorType
+      = new FilteredElementCollector(doc)
+        .OfClass(typeof(FloorType))
+        .FirstOrDefault<Element>()
+          as FloorType;
+
+            Element profileElement
+              = new FilteredElementCollector(doc)
+                .OfClass(typeof(FamilyInstance))
+                .OfCategory(BuiltInCategory.OST_GenericModel)
+                .FirstOrDefault<Element>();
+
+            // Get the handle of the application
+            Application application = doc.Application;
+
+            
+
+            // Define the profile for the floor based on our future selection (exterior walls)
+            CurveArray profile = new CurveArray();
+
+
+            string prompt = "Exterior Walls Count: " + ExteriorWalls.Count;
+            TaskDialog.Show("Revit", prompt);
+
+            // Go through the outer walls
+            if (ExteriorWalls.Count != 0)
+            {
+                foreach (ElementId id in ExteriorWalls)
+                {
+                    Element element = doc.GetElement(id);
+                    Wall wall = element as Wall;
+
+                    if (wall != null)
+                    {
+                        LocationCurve wallCurve = wall.Location as LocationCurve;
+                        Curve curve = wallCurve.Curve;
+                        profile.Append(Line.CreateBound(curve.GetEndPoint(1), curve.GetEndPoint(0)));
+                        string promptm = "Adding Line: " + curve.GetEndPoint(0) + " " + curve.GetEndPoint(1);
+                        TaskDialog.Show("Revit", promptm);
+                        //footprint.Append(wallCurve.Curve);
+                        continue;
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception(
+                "Please select a curve loop, wall loop or "
+                + "combination of walls and curves to "
+                + "create a footprint floor.");
+            }
+            // End of Footprint
+
+            // Create Element Floor
+            using (Transaction trans = new Transaction(doc, "Create Floor"))
+
+            {
+
+                FailureHandlingOptions failureHandlingOptions
+                  = trans.GetFailureHandlingOptions();
+
+                FailureHandler failureHandler
+                  = new FailureHandler();
+
+                failureHandlingOptions.SetFailuresPreprocessor(failureHandler);
+                failureHandlingOptions.SetClearAfterRollback(true);
+
+                trans.SetFailureHandlingOptions(failureHandlingOptions);
+
+                XYZ normal = XYZ.BasisZ;
+
+                trans.Start();
+
+               
+
+                //Add floor
+                Floor newFloor = doc.Create.NewFloor(profile: profile, floorType: floorType, level: level, structural: true);
+
+                newFloor.get_Parameter(
+                BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(0);
+
+                trans.Commit();
+
+                string promptx = "Successfully created Floor ";
+                TaskDialog.Show("Revit", promptx);
+            }
 
 
         }
