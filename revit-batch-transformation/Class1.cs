@@ -349,10 +349,13 @@ namespace RevitBatch
                 trans.SetFailureHandlingOptions(failureHandlingOptions);
                 trans.Start();
 
+                //Improve with FootPrintFix
+                CurveArray footprintFix = SortCurvesContiguous(footprint);
+
                 // Create Roof
                 FootPrintRoof footprintRoof
               = doc.Create.NewFootPrintRoof(
-                footprint, level2, roofType,
+                footprintFix, level2, roofType,
                 out footPrintToModelCurveMapping);
 
                 ModelCurveArrayIterator iterator
