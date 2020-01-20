@@ -38,11 +38,13 @@ namespace RevitBatch
                 string[] dataFiles =
                     Directory.GetFiles(dataDirectory, "*.txt", SearchOption.AllDirectories);
                 System.IO.StreamWriter failLogFile =
-                            new System.IO.StreamWriter(dataDirectory + @"\failing.txt", false);
+                            new System.IO.StreamWriter(repoDirectory + @"\failing.txt", false);
                 System.IO.StreamWriter successLogFile =
-                            new System.IO.StreamWriter(dataDirectory + @"\success.txt", false);
+                            new System.IO.StreamWriter(repoDirectory + @"\success.txt", false);
                 foreach (string dataFile in dataFiles)
                 {
+
+             
                     //Document doc = app.NewProjectDocument(UnitSystem.Metric);
                     // This template is needed to have the families for windows, doors available
                     // CHANGE PATH
@@ -135,11 +137,11 @@ namespace RevitBatch
                     }
 
                     //Create Floor
-                    //try
-                    //{
+                    try
+                    {
                         FloorCreation(doc,
                                       ExteriorWalls, level, commandData);
-                   /*     successLogFile.WriteLine(dataFile + " FLOOR ADDED");
+                        successLogFile.WriteLine(dataFile + " FLOOR ADDED");
                         successLogFile.Flush();
                     }
                     catch
@@ -147,7 +149,7 @@ namespace RevitBatch
                         failLogFile.WriteLine(dataFile + " FLOOR FAILED");
                         failLogFile.Flush();
                         //TaskDialog.Show("Revit", "Failed Roof creation");
-                    }*/
+                    }
 
 
 
@@ -412,8 +414,8 @@ namespace RevitBatch
                         LocationCurve wallCurve = wall.Location as LocationCurve;
                         Curve curve = wallCurve.Curve;
                         profile.Append(Line.CreateBound(curve.GetEndPoint(1), curve.GetEndPoint(0)));
-                        string promptm = "Adding Line: " + curve.GetEndPoint(0) + " " + curve.GetEndPoint(1);
-                        TaskDialog.Show("Revit", promptm);
+                        //string promptm = "Adding Line: " + curve.GetEndPoint(0) + " " + curve.GetEndPoint(1);
+                        //TaskDialog.Show("Revit", promptm);
                         //footprint.Append(wallCurve.Curve);
                         continue;
                     }
