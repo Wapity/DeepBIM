@@ -397,7 +397,7 @@ namespace RevitBatch
 
             // Define the profile for the floor based on our future selection (exterior walls)
             CurveArray profile = new CurveArray();
-            CurveArray profile2 = new CurveArray();
+            //CurveArray profile2 = new CurveArray();
 
 
             //string prompt = "Exterior Walls Count: " + ExteriorWalls.Count;
@@ -416,11 +416,18 @@ namespace RevitBatch
                         LocationCurve wallCurve = wall.Location as LocationCurve;
                         Curve curve = wallCurve.Curve;
                         profile.Append(Line.CreateBound(curve.GetEndPoint(1), curve.GetEndPoint(0)));
-                        profile2.Append(Line.CreateBound(curve.GetEndPoint(0), curve.GetEndPoint(1)));
+                        //profile2.Append(Line.CreateBound(curve.GetEndPoint(0), curve.GetEndPoint(1)));
                         //string promptm = "Adding Line: " + curve.GetEndPoint(0) + " " + curve.GetEndPoint(1);
                         //TaskDialog.Show("Revit", promptm);
                         //footprint.Append(wallCurve.Curve);
                         continue;
+                    }
+                    ModelCurve modelCurve = element as ModelCurve;
+                    if (modelCurve != null)
+                    {
+                        profile.Append(modelCurve.GeometryCurve);
+                        //profile2.Append(modelCurve.GeometryCurve);
+
                     }
                 }
             }
@@ -456,18 +463,13 @@ namespace RevitBatch
 
 
                 //Add floor
-                try
-                {
-                    Floor newFloor = doc.Create.NewFloor(profile: profile, floorType: floorType, level: level, structural: true);
+                CurveArray profileFix = SortCurvesContiguous(profile);
+
+                    Floor newFloor = doc.Create.NewFloor(profile: profileFix, floorType: floorType, level: level, structural: true);
                     newFloor.get_Parameter(
                     BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(0);
-                }
-                catch
-                {
-                    Floor newFloor = doc.Create.NewFloor(profile: profile2, floorType: floorType, level: level, structural: true);
-                    newFloor.get_Parameter(
-                    BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(0);
-                }
+                
+            
               
                 
 
@@ -963,6 +965,130 @@ namespace RevitBatch
             return elementIds;
         }
         // Added code ends here
+
+        // FIXING LOOPS CODE START:
+        /// <summary>
+/// Sort a list of curves to make them correctly 
+/// ordered and oriented to form a closed loop.
+/// </summary>
+public static CurveArray SortCurvesContiguous(
+  CurveArray curvesA
+  )
+{
+
+            List<Curve> myList = new List<Curve>();
+            IList<Curve> curves = myList;
+            const double _inch = 1.0 / 12.0;
+            const double _sixteenth = _inch / 16.0;
+
+
+            foreach (Curve mycurve in curvesA)
+            {
+                curves.Add(mycurve);
+            }
+
+  int n = curves.Count;
+ 
+  // Walk through each curve (after the first) 
+  // to match up the curves in order
+ 
+  for( int i = 0; i < n; ++i )
+  {
+    Curve curve = curves[i];
+    XYZ endPoint = curve.GetEndPoint( 1 );
+ 
+    //if( debug_output )
+    //{
+    //  Debug.Print( "{0} endPoint {1}", i,
+    //    Util.PointString( endPoint ) );
+    //}
+ 
+    XYZ p;
+ 
+    // Find curve with start point = end point
+ 
+    bool found = (i + 1 >= n);
+ 
+    for( int j = i + 1; j < n; ++j )
+    {
+      p = curves[j].GetEndPoint( 0 );
+ 
+      // If there is a match end->start, 
+      // this is the next curve
+ 
+      if( _sixteenth > p.DistanceTo( endPoint ) )
+      {
+        //if( debug_output )
+        //{
+        //  Debug.Print(
+        //    "{0} start point, swap with {1}",
+        //    j, i + 1 );
+        //}
+ 
+        if( i + 1 != j )
+        {
+          Curve tmp = curves[i + 1];
+          curves[i + 1] = curves[j];
+          curves[j] = tmp;
+        }
+        found = true;
+        break;
+      }
+ 
+      p = curves[j].GetEndPoint( 1 );
+ 
+      // If there is a match end->end, 
+      // reverse the next curve
+ 
+      if( _sixteenth > p.DistanceTo( endPoint ) )
+      {
+        if( i + 1 == j )
+        {
+          //if( debug_output )
+          //{
+          //  Debug.Print(
+          //    "{0} end point, reverse {1}",
+          //    j, i + 1 );
+          //}
+ 
+          curves[i + 1] = curves[j].CreateReversed();
+                             
+        }
+        else
+        {
+          //if( debug_output )
+          //{
+          //  Debug.Print(
+          //    "{0} end point, swap with reverse {1}",
+          //    j, i + 1 );
+          //}
+ 
+          Curve tmp = curves[i + 1];
+          curves[i + 1] = curves[j].CreateReversed();
+          curves[j] = tmp;
+        }
+        found = true;
+        break;
+      }
+    }
+    if( !found )
+    {
+      throw new Exception( "SortCurvesContiguous:"
+        + " non-contiguous input curves" );
+    }
+  }
+
+            CurveArray ca =  new CurveArray();
+
+            foreach (Curve mycurve in curves)
+            {
+                ca.Append(mycurve);
+            }
+            return ca;
+}
+
+
+        // FIXING LOOPS CODE ENDS
 
     }
 }
