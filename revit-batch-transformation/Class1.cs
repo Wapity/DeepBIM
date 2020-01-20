@@ -477,8 +477,8 @@ namespace RevitBatch
 
                 trans.Commit();
 
-                string promptx = "Successfully created Floor ";
-                TaskDialog.Show("Revit", promptx);
+                //string promptx = "Successfully created Floor ";
+                //TaskDialog.Show("Revit", promptx);
             }
 
 
