@@ -299,8 +299,8 @@ namespace RevitBatch
             //ExteriorWalls = GetAllExteriorWalls(doc, level);
            // ExteriorWalls = GetOuterWallByRoom( commandData, doc, level);
 
-            string prompt = "Exterior Walls Count: "+ ExteriorWalls.Count;
-            TaskDialog.Show("Revit", prompt);
+            //string prompt = "Exterior Walls Count: "+ ExteriorWalls.Count;
+            //TaskDialog.Show("Revit", prompt);
 
 
             // Go through the outer walls
@@ -396,10 +396,11 @@ namespace RevitBatch
 
             // Define the profile for the floor based on our future selection (exterior walls)
             CurveArray profile = new CurveArray();
+            CurveArray profile2 = new CurveArray();
 
 
-            string prompt = "Exterior Walls Count: " + ExteriorWalls.Count;
-            TaskDialog.Show("Revit", prompt);
+            //string prompt = "Exterior Walls Count: " + ExteriorWalls.Count;
+            //TaskDialog.Show("Revit", prompt);
 
             // Go through the outer walls
             if (ExteriorWalls.Count != 0)
@@ -414,6 +415,7 @@ namespace RevitBatch
                         LocationCurve wallCurve = wall.Location as LocationCurve;
                         Curve curve = wallCurve.Curve;
                         profile.Append(Line.CreateBound(curve.GetEndPoint(1), curve.GetEndPoint(0)));
+                        profile2.Append(Line.CreateBound(curve.GetEndPoint(0), curve.GetEndPoint(1)));
                         //string promptm = "Adding Line: " + curve.GetEndPoint(0) + " " + curve.GetEndPoint(1);
                         //TaskDialog.Show("Revit", promptm);
                         //footprint.Append(wallCurve.Curve);
@@ -450,13 +452,25 @@ namespace RevitBatch
 
                 trans.Start();
 
-               
+
 
                 //Add floor
-                Floor newFloor = doc.Create.NewFloor(profile: profile, floorType: floorType, level: level, structural: true);
+                try
+                {
+                    Floor newFloor = doc.Create.NewFloor(profile: profile, floorType: floorType, level: level, structural: true);
+                    newFloor.get_Parameter(
+                    BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(0);
+                }
+                catch
+                {
+                    Floor newFloor = doc.Create.NewFloor(profile: profile2, floorType: floorType, level: level, structural: true);
+                    newFloor.get_Parameter(
+                    BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(0);
+                }
+              
+                
 
-                newFloor.get_Parameter(
-                BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(0);
+               
 
                 trans.Commit();
 
