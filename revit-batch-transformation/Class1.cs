@@ -23,6 +23,7 @@ namespace RevitBatch
             // CHANGE PATH
             string repoDirectory = @"C:\UserData\z0044dcu\Documents\GitHub\private\DeepBIM";
             //string repoDirectory = @"C:\Users\gunther\dev\DeepBIM";
+            // string repoDirectory = @"C:\Users\Alex\DeepBIM";
 
 
             UIApplication uiapp = commandData.Application;
