@@ -5,9 +5,10 @@ from tensorflow.python.keras.models import load_model
 
 from dataset import process
 from model import create_model_regressor
+from train import minmax
 
-path_data ='data/test.csv'
-X,data = process(path_data,training=False)
+path_data ='data/bim_prediction.csv'
+X = process(path_data,training=False, MinMax = minmax)
 
 """Prediction of cooling """
 best_model_cooling = KerasRegressor(build_fn=create_model_regressor)

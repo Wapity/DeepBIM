@@ -12,38 +12,39 @@ from tensorflow.python.keras.models import load_model
 from model import create_model_regressor, create_model_regressor
 from dataset import process
 
-path_data = 'data/dataset.csv'
-X_train_div, X_test_div, y1_train, y1_test, y2_train, y2_test = process(path_data,training=True)
+path_data = '../../EnergyReports/bim_train.csv'
+X_train_div, X_test_div, y1_train, y1_test, y2_train, y2_test, minmax = process(path_data,training=True)
+
+if __name__ == '__main__':
+
+    param_grid = {
+                    'epochs':[200] ,
+                    'batch_size':[20]
+                    }
+    """test with epochs 2, batch_size 2 , put back epochs 200, batch_size 20 or other values when ready to train"""
+    # epochs with + 100, 200 , batch_size before with  + 50, 100
+    #top with epochs = 200 , batch_size = 20
+    #update when GPU
+
+    """ Model Cooling """
+    model1 = KerasRegressor(build_fn = create_model_regressor , verbose = 2)
+    grid_search_Keras_Reg = GridSearchCV(model1 , param_grid , cv=5)
+    grid_search_Keras_Reg.fit(X_train_div, y1_train)
 
 
-param_grid = {
-                'epochs':[2] ,
-                'batch_size':[2]
-                }
-"""test with epochs 2, batch_size 2 , put back epochs 200, batch_size 20 or other values when ready to train"""
-# epochs with + 100, 200 , batch_size before with  + 50, 100
-#top with epochs = 200 , batch_size = 20
-#update when GPU
+    print('Best parameters for cooling load {}'.format(grid_search_Keras_Reg.best_params_))
+    print('The Train R2 score is',r2_score(y1_train, grid_search_Keras_Reg.predict(X_train_div)))
+    print('The Test R2 score is',r2_score(y1_test, grid_search_Keras_Reg.predict(X_test_div)))
+    best_model_cooling = grid_search_Keras_Reg.best_estimator_
+    best_model_cooling.model.save('data/best_model_cooling.h5')
 
-""" Model Cooling """
-model1 = KerasRegressor(build_fn = create_model_regressor , verbose = 2)
-grid_search_Keras_Reg = GridSearchCV(model1 , param_grid , cv=5)
-grid_search_Keras_Reg.fit(X_train_div, y1_train)
+    """ Model Heating """
+    model2 = KerasRegressor(build_fn = create_model_regressor , verbose = 2)
+    grid_search_Keras2 = GridSearchCV(model2 , param_grid , cv=10)
+    grid_search_Keras2.fit(X_train_div, y2_train)
 
-
-print('Best parameters for cooling load {}'.format(grid_search_Keras_Reg.best_params_))
-print('The Train R2 score is',r2_score(y1_train, grid_search_Keras_Reg.predict(X_train_div)))
-print('The Test R2 score is',r2_score(y1_test, grid_search_Keras_Reg.predict(X_test_div)))
-best_model_cooling = grid_search_Keras_Reg.best_estimator_
-best_model_cooling.model.save('data/best_model_cooling.h5')
-
-""" Model Heating """
-model2 = KerasRegressor(build_fn = create_model_regressor , verbose = 2)
-grid_search_Keras2 = GridSearchCV(model2 , param_grid , cv=10)
-grid_search_Keras2.fit(X_train_div, y2_train)
-
-print('Best parameters for heating load {}'.format(grid_search_Keras2.best_params_))
-print('The Train R2 score is',r2_score(y2_train, grid_search_Keras2.predict(X_train_div)))
-print('The Test R2 score is',r2_score(y2_test, grid_search_Keras2.predict(X_test_div)))
-best_model_heating = grid_search_Keras2.best_estimator_
-best_model_heating.model.save('data/best_model_heating.h5')
+    print('Best parameters for heating load {}'.format(grid_search_Keras2.best_params_))
+    print('The Train R2 score is',r2_score(y2_train, grid_search_Keras2.predict(X_train_div)))
+    print('The Test R2 score is',r2_score(y2_test, grid_search_Keras2.predict(X_test_div)))
+    best_model_heating = grid_search_Keras2.best_estimator_
+    best_model_heating.model.save('data/best_model_heating.h5')
