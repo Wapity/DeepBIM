@@ -4,6 +4,9 @@ import pandas as pd
 
 from html_extractor import html_single_extractor
 
+""" Extactor of heating/cooling load and parameters for all buildings from Htm folder
+of .htm Revit 'standard' reports """
+
 """OPENING"""
 PATH = "/Users/alex/Desktop/ArchiBIM/DeepBIM/EnergyReports/Htm" #change to location of htm reports of Revit
 get_keys=True
@@ -19,6 +22,7 @@ with open('bim_train.csv', mode='w') as bim_train:
 
             if get_keys:
                 keys, items = html_single_extractor(text,get_keys)
+                #print(keys)
                 bim_writer.writerow(keys)
             else:
                 items = html_single_extractor(text,get_keys)
