@@ -24,22 +24,22 @@ def process(path_data,training=True, MinMax = None):
     Y2 = data[y2_column]
 
     if training == True :
-        """Splitting"""
+        """ Splitting """
         X_train_div, X_test_div, y1_train, y1_test = train_test_split(X, Y1, random_state = 5, test_size = 0.2)
         X_train_div, X_test_div, y2_train, y2_test = train_test_split(X, Y2, random_state = 5, test_size = 0.2)
 
-        """Scaling"""
+        """ Scaling """
         MinMax = MinMaxScaler(feature_range = (0,1))
         X_train_div = MinMax.fit_transform(X_train_div)
         X_test_div = MinMax.transform(X_test_div)
         return X_train_div, X_test_div, y1_train.to_numpy(), y1_test.to_numpy(), y2_train.to_numpy(), y2_test.to_numpy(), MinMax
 
-    """Scaling - If test"""
+    """ Scaling with previous scaler - If test """
 
     X = MinMax.transform(X)
     return X
 
 if __name__ == '__main__':
-    path_data = 'data/bim_train.csv'
-    X_train_div, X_test_div, y1_train, y1_test, y2_train, y2_test = process(path_data,training=True)
+    path_data = '../../EnergyReports/bim_train.csv'
+    X_train_div, X_test_div, y1_train, y1_test, y2_train, y2_test, minmax = process(path_data,training=True)
     print(y1_train)

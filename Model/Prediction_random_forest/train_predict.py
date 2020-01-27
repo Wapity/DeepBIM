@@ -7,14 +7,14 @@ from dataset import process
 
 """ Training, test and prediction of cooling/heating load (all-in-one)"""
 
-#import data for training (with cross validation) and test
-path_data_train = 'data/bim_train.csv'
+#import data for training (with cross validation) and test from EnergyReports
+path_data_train = '../../EnergyReports/bim_train.csv'
 X_train_div, X_test_div, y1_train, y1_test, y2_train, y2_test, minmax = process(path_data_train,training=True)
 
 #import data for prediction
 path_data_prediction ='data/bim_prediction.csv'
 X = process(path_data_prediction,training=False, MinMax = minmax) #MinMax to scale prediction data
-print(X)
+
 
 #Parameters for grid search
 param_grid = {'max_features':['auto', 'log2'], 'max_depth':[5]} # ,10,15,20,30,50,60
