@@ -10,13 +10,13 @@ of buildings (energy efficiency) as a function of building parameters.
 * CPU
 
 ## Commands
-To train :
+To train and test :
 
 python train.py
 
 To predict new heating and cooling by loading the best model :
 
-Put the new parameters in bim_prediction.csv 
+Put the new parameters in bim_prediction.csv
 
 Run:
 
