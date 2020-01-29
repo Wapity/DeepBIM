@@ -34,12 +34,13 @@ def html_single_extractor(text, get_keys=False):
             dict_result['Longitude'] = int(re.findall(r'\d+', text[i + 1])[0])
         # Number of people
         elif "People" in text[i] and index_people == 0:
-            dict_result['Nb_of_people'] = int(re.findall(r'\d+', text[i])[0])
+            dict_result['Nb_of_people'] = int(
+                ''.join([i for i in re.findall(r'\d+', text[i])]))
             index_people += 1
         # Volume
         elif "Volume" in text[i] and index_volume == 0:
-            dict_result['Volume'] = int(re.findall(
-                r'\d+', text[i + 1])[0] + re.findall(r'\d+', text[i + 1])[1])
+            dict_result['Volume'] = int(
+                ''.join([i for i in re.findall(r'\d+', text[i + 1])][:-1]))
             index_volume += 1
         # Mean daily_range
         elif text[i] == 'Range':
@@ -68,7 +69,8 @@ def html_single_extractor(text, get_keys=False):
             index_temp += 1
         # Wall Area
         elif 'Wall' in text[i] and text[i + 1] == 'Area':
-            wall_area.append(int(re.findall(r'\d+', text[i + 2])[0]))
+            wall_area.append(
+                int(''.join([i for i in re.findall(r'\d+', text[i + 2])])))
         # Door Area
         elif 'Door' in text[i] and text[i + 1] == 'Area':
             door_area.append(int(re.findall(r'\d+', text[i + 2])[0]))
@@ -77,22 +79,24 @@ def html_single_extractor(text, get_keys=False):
             partition_area.append(int(re.findall(r'\d+', text[i + 2])[0]))
         # Roof Area
         elif 'Roof' in text[i] and text[i + 1] == 'Area':
-            roof_area.append(int(re.findall(r'\d+', text[i + 2])[0]))
+            roof_area.append(
+                int(''.join([i for i in re.findall(r'\d+', text[i + 2])])))
         # Window Area
         elif 'Window' in text[i] and text[i + 1] == 'Area':
-            window_area.append(int(re.findall(r'\d+', text[i + 2])[0]))
+            window_area.append(
+                int(''.join([i for i in re.findall(r'\d+', text[i + 2])])))
         # Skylight Area
         elif 'Skylight' in text[i] and text[i + 1] == 'Area':
             skylight_area.append(int(re.findall(r'\d+', text[i + 2])[0]))
         # Peak cooling total load
         elif text[i] == 'Total' and text[i + 1] == 'Load' and index_cool == 0:
-            Cooling_load = int(re.findall(
-                r'\d+', text[i + 2])[0] + re.findall(r'\d+', text[i + 2])[1])
+            Cooling_load = int(
+                ''.join([i for i in re.findall(r'\d+', text[i + 2])]))
             index_cool += 1
         # Peak heating load
         elif text[i] == 'Heating' and text[i + 1] == 'Load' and index_heat == 0:
-            Heating_load = int(re.findall(
-                r'\d+', text[i + 2])[0] + re.findall(r'\d+', text[i + 2])[1])
+            Heating_load = int(
+                ''.join([i for i in re.findall(r'\d+', text[i + 2])]))
             index_heat += 1
 
     dict_result['Wall_area'] = sum(wall_area)
