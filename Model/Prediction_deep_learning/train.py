@@ -19,7 +19,7 @@ X_train_div, X_test_div, y1_train, y1_test, y2_train, y2_test, minmax = process(
 if __name__ == '__main__':
 
     param_grid = {
-        'epochs': [30000],
+        'epochs': [1000],
         'batch_size': [25]
     }
     # update when GPU
