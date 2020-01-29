@@ -15,7 +15,7 @@ content = [x.strip() for x in content]
 
 files_paths = []
 for i in range(len(content)):
-    if content[i].endswith("ROOF ADDED") :
+    if content[i].endswith("ROOF ADDED"):
         files_paths.append(str(content[i][:-20]))
 
 
@@ -24,10 +24,11 @@ for alpha in files_paths:
     liste2.append(alpha.replace('\\', '//'))
 
 
-count =0
+count = 0
 for file_dir in liste2:
     a = os.listdir(path=file_dir)
-    count+=1
+    count += 1
     for file in a:
         if file.endswith(".rvt"):
-            os.rename(file_dir+ "//" + file, file_dir + "//" + str(count) + ".rvt")
+            os.rename(file_dir + "//" + file, file_dir +
+                      "//" + str(count) + ".rvt")

@@ -9,7 +9,7 @@ of buildings (energy efficiency) as a function of building parameters.
 * scikit-learn
 
 ## Commands
-To train, test and predict new heating and cooling :
-python train_predict.py
+Put the new parameters to predict energy efficiency for in bim_prediction.csv
 
-Put the new parameters to predict energy efficiency for in bim_prediction.csv before
+To train, test (with bim_train.csv) and predict new heating and cooling (from bim_prediction.csv):
+python train_predict.py
