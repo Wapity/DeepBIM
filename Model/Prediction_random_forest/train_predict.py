@@ -20,7 +20,7 @@ X = process(path_data_prediction, training=False, MinMax=minmax)
 
 # Parameters for grid search
 param_grid = {'max_features': ['auto', 'log2'],
-              'max_depth': [5]}  # ,10,15,20,30,50,60
+              'max_depth': [10]}  # ,10,15,20,30,50,60
 # model
 model = RandomForestRegressor(random_state=5, n_estimators=700, n_jobs=-1)
 
