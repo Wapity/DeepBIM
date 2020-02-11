@@ -19,7 +19,7 @@ Creation of 3D floorplans with roof and floors :
 - Repeat for 400 files
 - When the folder of html reports is complete, in EnergyReports, run parser_main.py to extract all the information and write the dataset in bim_train.csv (change local path)
 
-- Training the model and predicting new values :
+Training the model and predicting new values :
     1) RandomForest : run train_predict.py to train and test the model on the dataset, and predict new heating and cooling loads for new values put in data/bim_prediction.csv (for further use) 
 Requirement : scikit-learn
     2) KerasRegressor : run train.py to train and test the model for each load. The best models are then saved and can be loaded to predict new heating and cooling loads with predict.py , for new values put in data/bim_prediction.csv (for further use) 
