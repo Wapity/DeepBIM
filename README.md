@@ -15,7 +15,7 @@ Creation of 3D floorplans with roof and floors :
     - Get the temporary htm file containing the report created at file:///C:/Users/"UserName"/AppData/Local/Temp and transfer it into a common folder
     - Close the report and floorplan
 - Repeat for 400 files
-- When the folder of html reports is complete, in EnergyReports, run parser_main.py to extract all the information and write the dataset in bim_train.csv (change local path)
+- When the folder of html reports is complete, in EnergyReports, run parser_main.py to extract all the information (parameters and heating and cooling load) and write the dataset in bim_train.csv (change local path)
 
 Training the model and predicting new values :
  - RandomForest : run train_predict.py to train and test the model on the dataset, and predict new heating and cooling loads for new values put in data/bim_prediction.csv (for further use) 
