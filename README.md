@@ -1,7 +1,7 @@
 # DeepBIM
 
 Creation of 3D floorplans with roof and floors : 
- - Follow the setup in revit-batch-transformation, then run the Revit Addin to create all the Revit files
+ - Follow the setup and requirements in revit-batch-transformation, then run the Revit Addin to create all the Revit files
  - A Success file is created indicating the floorplans where roofs and floors have been added correctly
  
  Batch Analysis :
