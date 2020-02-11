@@ -19,8 +19,9 @@ Creation of 3D floorplans with roof and floors :
 
 Training the model and predicting new values :
  - RandomForest : run train_predict.py to train and test the model on the dataset, and predict new heating and cooling loads for new values put in data/bim_prediction.csv (for further use) 
-Requirement : scikit-learn
+   - Requirements : scikit-learn
  - KerasRegressor : run train.py to train and test the model for each load. The best models are then saved and can be loaded to predict new heating and cooling loads with predict.py , for new values put in data/bim_prediction.csv (for further use) 
+   - Requirements : Tensorflow, Keras
 
     
     
