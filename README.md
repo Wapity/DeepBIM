@@ -6,7 +6,7 @@ Creation of 3D floorplans with roof and floors :
  
  Batch Analysis :
  - In EnergyReports, use Files.py to rename all the successul files (change local path)
- - After that gather all these files with different names into one folder manually
+ - Gather all these files with different names into one folder manually
  - For each file :
     - Open Revit 
     - Open Dynamo and load SetSpaces.dyn to automatically change above level and upper limit of spaces, let it run in         background
