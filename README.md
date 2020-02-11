@@ -11,7 +11,7 @@ Creation of 3D floorplans with roof and floors :
     - Open Revit 
     - Open Dynamo and load SetSpaces.dyn to automatically change above level and upper limit of spaces, let it run in         background
     - Place spaces automatically with the tool 
-    - Run heating and cooling load 
+    - Run heating and cooling load (change the type of materials/profile of building and HVAC sytem used if wanted) 
     - Get the temporary htm file containing the report created at file:///C:/Users/"UserName"/AppData/Local/Temp and transfer it into a common folder
     - Close the report and floorplan
 - Repeat for 400 files
