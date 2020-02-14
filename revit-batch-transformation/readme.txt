@@ -12,11 +12,3 @@ Change the paths in Class1.cs to correspond to your machine (look for "CHANGE PA
 Unzip the the .zip file in the Data directory
 Build in visual studio
 Open Revit -> addins -> external tools
-
-
-
-TODO:
-Add roofs/floors
-Make paths system independent
-[DONE]Make script read batch of 2D models instead of sample one
-[DONE]Automatically dismiss error messages for revit project creation
