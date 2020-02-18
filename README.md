@@ -13,7 +13,7 @@ Towards Automatic Extraction and Prediction of Annual Heating and Cooling Demand
     - Open Dynamo and load SetSpaces.dyn to automatically change above level and upper limit of spaces, let it run in         background : need of archi-lab package
     - Place spaces automatically with the tool 
     - Run heating and cooling load (change the type of materials/profile of building and HVAC sytem used if wanted) 
-    - Get the temporary htm file containing the report created at file:///C:/Users/"UserName"/AppData/Local/Temp and transfer it into a common folder
+    - Get the temporary htm file containing the report created at file:///C:/Users/"UserName"/AppData/Local/Temp and transfer it into a common folder (only existing when report is visualised in Revit)
     - Close the report and floorplan
 - Repeat for 400 files
 - When the folder of html reports is complete, in EnergyReports, run parser_main.py to extract all the information (parameters and heating and cooling load) and write the dataset in bim_train.csv (change local path)
